@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Llistat de temporades</title>
+    </head>
+    <body>
+        <center>
+            <h1>Llistat de temporades</h1><br>
+            <br>
+
+            <label for="serieDropdown">Selecciona una sèrie:</label>
+            <?php
+                include_once("classes/control.php");
+                include_once("classes/vista.php");
+                $c = new control();
+                $llistat = $c->llistatSeries();
+                $v = new vista();
+                $v->mostrarDropdownSeries ($llistat);
+            ?>
+
+            <br>
+            <br><a href="index.html"> Tornar </a>
+        </center>
+    </body>
+</html>
