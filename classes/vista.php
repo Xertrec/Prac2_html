@@ -36,8 +36,9 @@ class Vista {
         echo "</table>";		
     }
 
-    public function mostrarLlistatSeries ($llistaSeries, $triar) {
+    public function mostrarLlistatSeries($llistaSeries) {
         $this->abd->connectarBD();
+
         $res="<table border=1><tr bgcolor='lightgray'>
                             <th>Nom Serie</th>
                             <th>Any Creacio</th>
@@ -84,10 +85,9 @@ class Vista {
         echo ($res);
     }
 
-    public function mostrarLlistatTemporades ($llistatTemporades) {
+    public function mostrarLlistatTemporades($llistatTemporades) {
 
         $res="<table border=1><tr bgcolor='lightgray'>
-                            <th>Nom Serie</th>
                             <th>Número temporada</th>
                             <th>Descripció</th>
                             <th>Imatge</th>
@@ -96,13 +96,11 @@ class Vista {
                         
         foreach ($llistatTemporades as $temporada) {
             $res = $res . "<tr>";
-            $nomSerie = $temporada["nomSerie"];
             $numTemporada = $temporada["numTemporada"];
             $descripcio = $temporada["descripcio"];
             $imatge = $temporada["imatge"];
             $valoracioMitjana = $temporada["valoracioMitjana"];
             
-            $res = $res . "<td>$nomSerie</td>";
             $res = $res . "<td>$numTemporada</td>";
             $res = $res . "<td>$descripcio</td>";
             $res = $res . "<td><img src=$imatge></td>";

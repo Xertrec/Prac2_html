@@ -1,5 +1,7 @@
 <?php
+
 include_once ("taccesbd.php");
+
 class Serie {
     private $nomSerie;
     private $anyCreacio;
@@ -23,34 +25,25 @@ class Serie {
         $res = array();
         $this->abd->connectarBD();
     
-        if ($this->abd->consultaSQL("SELECT nomSerie, anyCreacio, descripcio, imatge, valoracioMitjana FROM serie"))
-        {
+        $consulta = "
+            SELECT serie.nomSerie, anyCreacio, serie.descripcio, serie.imatge, serie.valoracioMitjana, max(temporada.numTemporada) AS max
+            FROM serie INNER JOIN temporada ON serie.nomSerie = temporada.nomSerie
+            GROUP BY serie.nomSerie
+        ";
+        if ($this->abd->consultaSQL($consulta)) {
             $fila = $this->abd->consultaFila();
             $i = 0;
-            while ($fila != null)
-            {
-                $nomSerie = $this->abd->consultaDada("nomSerie");
-                $res[$i]["nomSerie"] = $nomSerie;
+            
+            while ($fila != null) {
+                $res[$i]["nomSerie"] = $this->abd->consultaDada("nomSerie");
                 $res[$i]["anyCreacio"] = $this->abd->consultaDada("anyCreacio");
                 $res[$i]["descripcio"] = $this->abd->consultaDada("descripcio");
                 $res[$i]["imatge"] = $this->abd->consultaDada("imatge");
                 $res[$i]["valoracioMitjana"] = $this->abd->consultaDada("valoracioMitjana");
+                $res[$i]["numTemporada"] = $this->abd->consultaDada("max");
     
                 $i++;
                 $fila = $this->abd->consultaFila();
-            }
-        }
-    
-        foreach ($res as $i => $serie)
-        {
-            $nomSerie = $serie["nomSerie"];
-            $SQL_temporades = "SELECT COUNT(*) AS numTemporada FROM temporada WHERE nomSerie = '$nomSerie'";
-            
-            if ($this->abd->consultaSQL($SQL_temporades))
-            {
-                $fila_temporades = $this->abd->consultaFila();
-                $quants = $this->abd->consultaDada("numTemporada");
-                $res[$i]["numTemporada"] = $quants;
             }
         }
     

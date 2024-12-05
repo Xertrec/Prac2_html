@@ -2,8 +2,6 @@
 header('Content-Type: text/html; charset=UTF-8');
 
 include_once ("Control.php");
-include_once ("temporada.php");
-include_once("valoracions.php");
 include_once("Vista.php");
 
 if (isset($_POST["opcio"])) {
@@ -14,8 +12,9 @@ if (isset($_POST["opcio"])) {
         case 'Veure temporades': {
             if (isset($_POST["nomSerie"])) {
                 $nomSerie = $_POST["nomSerie"];
-                $t = new Temporada();
-                $llistaTemporades = $t->llistatTemporades($nomSerie);
+
+                $c = new Control();
+                $llistaTemporades = $c->llistatTemporades($nomSerie);
 
                 $v->mostrarCapsalera("Llistat de temporades");
                 $v->mostrarLlistatTemporades($llistaTemporades);
@@ -28,6 +27,7 @@ if (isset($_POST["opcio"])) {
             if (isset($_POST["nomSerie"]) and isset($_POST["numTemporada"])) {
                 $nomSerie = $_POST["nomSerie"];
                 $numTemporada = $_POST["numTemporada"];
+                
                 $k = new Control();
                 $llistaValoracions = $k->llistatValoracions($nomSerie, $numTemporada);
 

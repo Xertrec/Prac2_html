@@ -39,11 +39,15 @@ class Temporada {
         $res = array();
         $this->abd->connectarBD();
 
-        if ($this->abd->consultaSQL("SELECT * FROM temporada WHERE nomSerie = '$nomSerie'")) {
+        $consulta = "
+            SELECT numTemporada, descripcio, imatge, valoracioMitjana 
+            FROM temporada 
+            WHERE nomSerie = '$nomSerie'
+        ";
+        if ($this->abd->consultaSQL($consulta)) {
             $fila = $this->abd->consultaFila();
             $i = 0;
             while ($fila != null) {
-                $res[$i]["nomSerie"] = $this->abd->consultaDada("nomSerie");
                 $res[$i]["numTemporada"] = $this->abd->consultaDada("numTemporada");
                 $res[$i]["descripcio"] = $this->abd->consultaDada("descripcio");
                 $res[$i]["imatge"] = $this->abd->consultaDada("imatge");

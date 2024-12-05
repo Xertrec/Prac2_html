@@ -3,9 +3,9 @@ header("Content-Type: text/html;charset=utf-8");
 
 //Classe CONTROL
 include_once ("serie.php");
+include_once ("temporada.php");
 include_once("valoracions.php");
-include_once ("GestioVista.php");
-include_once("Vista.php");
+include_once("GestioVista.php");
 
 class Control {
 	
@@ -18,6 +18,15 @@ class Control {
 
 		$s = new Serie();
 		$res = $s->llistatSeries();
+
+		return($res);
+	}
+
+	public function llistatTemporades($nomSerie) {
+		$res = "";
+
+		$t = new Temporada();
+		$res = $t->llistatTemporades($nomSerie);
 
 		return($res);
 	}

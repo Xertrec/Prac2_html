@@ -12,11 +12,12 @@
                 include_once("classes/Control.php");
                 include_once("classes/Vista.php");
                 $c = new Control();
-                $llistat = $c->llistatSeries();
+                $llistatSeries = $c->llistatSeries();
                 $v = new Vista();
-                $v->mostrarLlistatSeries ($llistat, true);
+                $v->mostrarLlistatSeries($llistatSeries);
             ?>
-            <br>
+            <br><br>
+            
             <br><a href="index.html"> Tornar </a>
         </center>
     </body>
