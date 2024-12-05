@@ -5,17 +5,41 @@
     </head>
     <body>
         <center>
-            <h1>Valorar temporada</h1><br>
-            <br>
+            <h1>Valorar temporada</h1><br><br>
 
-            <?php
-                include_once("classes/Control.php");
-                include_once("classes/Vista.php");
-                $c = new Control();
-                $llistat = $c->llistatSeries();
-                $v = new Vista();
-                $v->mostrarQuestionariValorar ($llistat);
-            ?>
+            <form action='./classes/GestioVista.php' method='POST'>
+                <?php
+                    include_once("classes/Control.php");
+                    include_once("classes/Vista.php");
+                    $c = new Control();
+                    $llistat = $c->llistatSeries();
+                    $v = new Vista();
+                    $v->mostrarSelectorSeries ($llistat);
+                ?>
+                <br><br>
+
+                <label for='numTemporada'>Nombre de temporada: </label>
+                <input type='number' id='numTemporada' name='numTemporada' required/>
+                <br><br>
+        
+                <label for='nomUsuari'>Nom d'usuari: </label>
+                <input type='text' id='nomUsuari' name='nomUsuari' required/>
+                <br><br>
+        
+                <label for='contrasenya'>Contrasenya: </label>
+                <input type='text' id='contrasenya' name='contrasenya' required/>
+                <br><br>
+        
+                <label for='valoracio'>Valoració: </label>
+                <input type='number' id='valoracio' name='valoracio' required/>
+                <br><br>
+        
+                <label for='comentari'>Comentari: </label>
+                <input type='text' id='comentari' name='comentari' required/>
+                <br><br>
+
+                <input type="submit" name="opcio" value="Valorar">
+            </form>
 
             <br>
             <br><a href="index.html"> Tornar </a>
