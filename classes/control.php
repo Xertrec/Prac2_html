@@ -2,10 +2,9 @@
 header("Content-Type: text/html;charset=utf-8");
 
 //Classe CONTROL
-include_once ("serie.php");
-include_once ("temporada.php");
-include_once("valoracions.php");
-include_once("GestioVista.php");
+include_once ("Serie.php");
+include_once ("Temporada.php");
+include_once("Valoracions.php");
 
 class Control {
 	
