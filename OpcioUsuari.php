@@ -22,7 +22,7 @@ if (isset($_POST["opcio"])) {
         }
         case "valTemp" :
         {
-            echo "No implementar 'Valorar una temporada'";
+            include_once("ValorarTemporada.html");
             break;
 
         }

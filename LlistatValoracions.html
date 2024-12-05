@@ -7,8 +7,6 @@
         <center>
             <h1>Llistat de valoracions de temporades</h1><br><br>
 
-            <label for="serieDropdown">Selecciona una sèrie:</label>
-
             <?php
                 include_once("classes/Control.php");
                 include_once("classes/Vista.php");
@@ -16,7 +14,6 @@
                 $llistat = $c->llistatSeries();
                 $v = new Vista();
                 $v->mostrarDropdownValoracions ($llistat);
-
             ?>
 
             <br>

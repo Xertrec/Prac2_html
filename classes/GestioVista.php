@@ -11,7 +11,7 @@ include_once("Vista.php");
     if (isset($_POST["nomSerie"])) {
         ?>
         <title>Llistat de temporades</title>
-    <?php
+        <?php
         $nomSerie = $_POST["nomSerie"];
         $t = new Temporada();
         $llistaTemporades = $t->llistatTemporades($nomSerie);
