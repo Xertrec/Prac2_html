@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 include_once ("temporada.php");
 include_once("valoracions.php");
-include_once("vista.php");
+include_once("Vista.php");
 ?>
 <center>
 <?php

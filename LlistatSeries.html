@@ -9,11 +9,11 @@
             <br>
 
             <?php
-                include_once("classes/control.php");
-                include_once("classes/vista.php");
-                $c = new control();
+                include_once("classes/Control.php");
+                include_once("classes/Vista.php");
+                $c = new Control();
                 $llistat = $c->llistatSeries();
-                $v = new vista();
+                $v = new Vista();
                 $v->mostrarLlistatSeries ($llistat, true);
             ?>
             <br>
