@@ -27,7 +27,7 @@ class Vista {
     }
 
     public function mostrarPeu() {
-        echo ('<br><a href="../index.html"> Tornar </a></center></body></html>');
+        echo ('<center><br><a href="../index.html"> Tornar </a></center></body></html>');
     }
     
     public function mostrarError ($missatge) {
@@ -74,8 +74,7 @@ class Vista {
 
     public function mostrarSelectorSeries ($llistaSeries) {
         $res = "<label for='serieDropdown'>Selecciona una sèrie:&nbsp;</label>";
-        $res = $res . "<select id='serieDropdown' name='nomSerie'>";
-        $res = $res . "<option selected='true' disabled='disabled'>Selecciona una opción</option>";
+        $res = $res . "<select id='serieDropdown' name='nomSerie' required>";
         
         foreach ($llistaSeries as $serie) {
             $res = $res . "<option value='" . $serie['nomSerie'] . "'>" . $serie['nomSerie'] . "</option>";

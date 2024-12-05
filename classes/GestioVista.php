@@ -37,8 +37,8 @@ if (isset($_POST["opcio"])) {
                 } else {
                     $v->mostrarCapsalera("Llistat de valoracions de temporades");
                     $v->mostrarLlistatValoracions($llistaValoracions);
-                    $v->mostrarPeu();
                 }
+                $v->mostrarPeu();
             }
             break;
         }
