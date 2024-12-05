@@ -22,9 +22,23 @@ class Temporada {
         }
     }
 
+    public function existeixTemporadaSerie($nomSerie, $numTemporada) {
+        $res = false;
+        $this->abd->connectarBD();
+
+        if ($this->abd->consultaSQL("SELECT COUNT(*) FROM temporada WHERE nomSerie = '$nomSerie' AND numTemporada = '$numTemporada'")) {
+            $res = $this->abd->existeixElement();
+            $this->abd->tancarConsulta();
+        }
+        
+        $this->abd->desconnectarBD();
+        return $res; 
+    }
+
     public function llistatTemporades($nomSerie) {
         $res = array();
         $this->abd->connectarBD();
+
         if ($this->abd->consultaSQL("SELECT * FROM temporada WHERE nomSerie = '$nomSerie'")) {
             $fila = $this->abd->consultaFila();
             $i = 0;
@@ -40,6 +54,7 @@ class Temporada {
             }
             $this->abd->tancarConsulta();
         }
+
         $this->abd->desconnectarBD();
         return $res; 
     }

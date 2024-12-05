@@ -107,8 +107,7 @@ class TAccesbd
     //Funció que obté la fila de dades d'una consulta prèviament
     //realitzada. Retorna totes les dades de la fila per ser
     //consultades posteriorment amb "consultaDada"
-    public function consultaFila ()
-    {
+    public function consultaFila() {
         $this->fila = null;
         if ($this->dades != null)
         {
@@ -118,13 +117,21 @@ class TAccesbd
     }
     
     /*
+    Funció que retorna cert si la darrera consulta realitzada 
+    retorna algun element. En cas contrari, retorna fals.
+    */
+    public function existeixElement() {
+        $res = mysqli_fetch_assoc($this->dades)['COUNT(*)'] > 0;
+        return $res;
+    }
+    
+    /*
     Funció que després de fer un "consultaFila", i donat el nom d'un
     camp de la consulta, retorna la dada del camp del registre actual.
     Tant si el nom del camp no existeix als resultats, com si ja s'han
     consultat totes les files del resultat, la funció retorna NULL
     */
-    public function consultaDada ($camp)
-    {
+    public function consultaDada($camp) {
         $res = null;
         if ($this->fila != null)
         {

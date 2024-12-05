@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 
+include_once ("Control.php");
 include_once ("temporada.php");
 include_once("valoracions.php");
 include_once("Vista.php");
@@ -27,12 +28,17 @@ if (isset($_POST["opcio"])) {
             if (isset($_POST["nomSerie"]) and isset($_POST["numTemporada"])) {
                 $nomSerie = $_POST["nomSerie"];
                 $numTemporada = $_POST["numTemporada"];
-                $t = new Valoracio();
-                $llistaValoracions = $t->llistatValoracions($nomSerie, $numTemporada);
+                $k = new Control();
+                $llistaValoracions = $k->llistatValoracions($nomSerie, $numTemporada);
 
-                $v->mostrarCapsalera("Llistat de valoracions de temporades");
-                $v->mostrarLlistatValoracions($llistaValoracions);
-                $v->mostrarPeu();
+                // Si es una string es el missatge d'error passat per Control
+                if (is_string($llistaValoracions)) {
+                    $v->mostrarError($llistaValoracions);
+                } else {
+                    $v->mostrarCapsalera("Llistat de valoracions de temporades");
+                    $v->mostrarLlistatValoracions($llistaValoracions);
+                    $v->mostrarPeu();
+                }
             }
             break;
         }

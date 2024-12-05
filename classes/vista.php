@@ -2,7 +2,7 @@
 
 include_once ("taccesbd.php");
 
-class Vista{
+class Vista {
     private $abd;
 
     function __construct() {
@@ -28,6 +28,12 @@ class Vista{
 
     public function mostrarPeu() {
         echo ('<br><a href="../index.html"> Tornar </a></center></body></html>');
+    }
+    
+    public function mostrarError ($missatge) {
+        echo "<table bgcolor=grey align=center border = 1 cellpadding = 10>";
+        echo "<tr><td><br><h2> $missatge </h2><br><br></td></tr>";
+        echo "</table>";		
     }
 
     public function mostrarLlistatSeries ($llistaSeries, $triar) {
@@ -109,28 +115,29 @@ class Vista{
     public function mostrarLlistatValoracions ($llistatValoracions){
 
         $res="<table border=1><tr bgcolor='lightgray'>
-                            <th>Nom Serie</th>
-                            <th>Número temporada</th>
-                            <th>Usuari</th>
-                            <th>Puntuació</th>
+                            <th>Nom valorador</th>
+                            <th>Cognom valorador</th>
+                            <th>Fotografía</th>
+                            <th>Valoració donada</th>
                             <th>Comentari</th>";
         $res = $res . "</tr> ";
                         
         foreach ($llistatValoracions as $valoracio) {
             $res = $res . "<tr>";
-            $nomSerie = $valoracio["nomSerie"];
-            $numTemporada = $valoracio["numTemporada"];
-            $nomUsuari = $valoracio["nomUsuari"];
+            $nomValorador = $valoracio["nomValorador"];
+            $cognomValorador = $valoracio["cognomValorador"];
+            $imatgeValorador = $valoracio["imatgeValorador"];
             $valor = $valoracio["valor"];
             $comentari = $valoracio["comentari"];
             
-            $res .= "<td>$nomSerie</td>";
-            $res .= "<td>$numTemporada</td>";
-            $res .= "<td>$nomUsuari</td>";
+            $res .= "<td>$nomValorador</td>";
+            $res .= "<td>$cognomValorador</td>";
+            $res .= "<td>$imatgeValorador</td>";
             $res .= "<td>$valor</td>";
             $res .= "<td>$comentari</td>";
             $res .= "</tr>";
         }
+        
         $res = $res . "</table>";
         echo ($res);
     }
