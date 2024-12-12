@@ -21,9 +21,12 @@ class Usuari {
     }
 
     public function tipusUsuari($nomUsuari) {
+        // TODO
     }
 
-    public function login($nomUsuari, $contrasenya) {}
+    public function login($nomUsuari, $contrasenya) {
+        // TODO
+    }
 }
 
 ?>
