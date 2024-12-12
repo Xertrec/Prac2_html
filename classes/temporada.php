@@ -62,6 +62,8 @@ class Temporada {
         $this->abd->desconnectarBD();
         return $res; 
     }
+
+    public function recalcularMitjanaTemporada($nomSerie, $numTemporada) {}
 }
 
 ?>

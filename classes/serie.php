@@ -49,6 +49,8 @@ class Serie {
         $this->abd->desconnectarBD();
         return $res;
     }
+
+    public function recalcularMitjanaSerie($nomSerie) {}
 }
 
 ?>

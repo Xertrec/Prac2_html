@@ -20,6 +20,9 @@ class Usuari {
         }
     }
 
+    public function tipusUsuari($nomUsuari) {
+    }
+
     public function login($nomUsuari, $contrasenya) {}
 }
 

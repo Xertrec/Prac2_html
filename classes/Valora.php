@@ -1,7 +1,9 @@
 <?php
 
+include_once("Usuari.php");
 include_once("temporada.php");
-include_once ("taccesbd.php");
+include_once("serie.php");
+include_once("taccesbd.php");
 
 //Classe de MODEL encarregada de la gestió de la taula Temporada de la base de dades
 class Valoracio {
@@ -63,8 +65,55 @@ class Valoracio {
     public function valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valor, $comentari) {
         $t = new Temporada();
         if ($t->existeixTemporadaSerie($nomSerie, $numTemporada) == false) {
-            return "[ERROR: La sèrie no te aquesta temporada]"
+            return "ERROR: La sèrie no te aquesta temporada";
         }
+
+        $u = new Usuari();
+        if ($u->tipusUsuari($nomUsuari) != "Valorador") {
+            return "ERROR: L'usuari no és valorador";
+        }
+
+        $u->login($nomUsuari, $contrasenya);
+
+        if ($this->comprovarValoracioFeta($nomSerie, $numTemporada, $nomUsuari) == true) {
+            return "ERROR: Temporada ja valorada pel valorador";
+        }
+
+        
+        $this->abd->connectarBD();
+        $consulta = "
+            INSERT INTO valora
+            VALUES ('$nomSerie', '$numTemporada', '$nomUsuari', '$valor', '$comentari')
+        ";
+        if ($this->abd->consultaUnica($consulta) != true) {
+            // Mostrar error
+        }
+        $this->abd->desconnectarBD();
+
+        $t = new Temporada();
+        if ($t->recalcularMitjanaTemporada($nomSerie, $numTemporada) == false) {
+            // Mostrar error
+        }
+
+        $s = new Serie();
+        if ($t->recalcularMitjanaSerie($nomSerie)) {
+            return "Temporada valorada correctament";
+        } else {
+            // Mostrar error
+        }
+    }
+
+    public function comprovarValoracioFeta($nomSerie, $numTemporada, $nomUsuari) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT COUNT(valor) 
+            FROM valora 
+            WHERE nomSerie = '$nomSerie' AND numTemporada = '$numTemporada' AND nomUsuari = '$nomUsuari'
+        ";
+
+        return ($this->abd->consultaUnica($consulta) == 1);
+        $this->abd->desconnectarBD();
     }
 }
 
