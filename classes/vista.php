@@ -1,19 +1,6 @@
-<?php 
-
-include_once ("taccesbd.php");
+<?php
 
 class Vista {
-    private $abd;
-
-    function __construct() {
-        $this->abd = new TAccesbd(); 
-    }
-
-    function __destruct() {
-        if (isset($this->abd)) {
-            unset($this->abd);
-        }
-    }
 
     public function mostrarCapsalera($titol) {
         echo ('<!DOCTYPE HTML><html>
@@ -37,7 +24,6 @@ class Vista {
     }
 
     public function mostrarLlistatSeries($llistaSeries) {
-        $this->abd->connectarBD();
 
         $res="<table border=1><tr bgcolor='lightgray'>
                             <th>Nom Serie</th>
@@ -66,9 +52,7 @@ class Vista {
         }
         $res = $res . "</table>";
         echo ($res);
-    
-        $this->abd->tancarConsulta();
-        $this->abd->desconnectarBD();
+        
         return $res;
     }
 
