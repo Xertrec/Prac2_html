@@ -43,7 +43,19 @@ if (isset($_POST["opcio"])) {
             break;
         }
         
-        case 'Valorar': {
+        case 'Valorar temporada': {
+            if (isset($_POST["nomSerie"]) and isset($_POST["numTemporada"]) and isset($_POST["nomUsuari"]) 
+                and isset($_POST["contrasenya"]) and isset($_POST["valoracio"]) and isset($_POST["comentari"])) {
+                $nomSerie = $_POST["nomSerie"];
+                $numTemporada = $_POST["numTemporada"];
+                $nomUsuari = $_POST["nomUsuari"];
+                $contrasenya = $_POST["contrasenya"];
+                $valoracio = $_POST["valoracio"];
+                $comentari = $_POST["comentari"];
+
+                $c = new Control();
+                $c->valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valoracio, $comentari);
+            }
             break;
         }
     }

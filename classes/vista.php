@@ -50,6 +50,7 @@ class Vista {
             $res = $res . "<td><img src=$imatge></td>";
             $res = $res . "<td>$valoracioMitjana</td>";
         }
+
         $res = $res . "</table>";
         echo ($res);
         
@@ -57,15 +58,40 @@ class Vista {
     }
 
     public function mostrarSelectorSeries ($llistaSeries) {
-        $res = "<label for='serieDropdown'>Selecciona una sèrie:&nbsp;</label>";
-        $res = $res . "<select id='serieDropdown' name='nomSerie' required>";
-        
+        $res = "<label>Selecciona una sèrie:</label><br><br>";
+
+        $res = $res . "<table border=1><tr bgcolor='lightgray'>
+                            <th>Nom Serie</th>
+                            <th>Any Creacio</th>
+                            <th>Descripcio</th>
+                            <th>Numero Temporades</th>
+                            <th>Imatge</th>
+                            <th>Valoracio Mitjana</th>
+                            <th>Selector sèrie</th>";
+        $res = $res . "</tr> ";
+                        
         foreach ($llistaSeries as $serie) {
-            $res = $res . "<option value='" . $serie['nomSerie'] . "'>" . $serie['nomSerie'] . "</option>";
+            $res = $res . "<tr>";
+            $nomSerie = $serie["nomSerie"];
+            $anyCreacio = $serie["anyCreacio"];
+            $descripcio = $serie["descripcio"];
+            $numTemporada = $serie["numTemporada"];
+            $imatge = $serie["imatge"];
+            $valoracioMitjana = $serie["valoracioMitjana"];
+            
+            $res = $res . "<td>$nomSerie</td>";
+            $res = $res . "<td>$anyCreacio</td>";
+            $res = $res . "<td>$descripcio</td>";
+            $res = $res . "<td>$numTemporada</td>";
+            $res = $res . "<td><img src=$imatge></td>";
+            $res = $res . "<td>$valoracioMitjana</td>";
+            $res = $res . "<td><input type='radio' checked='false' name='nomSerie' value='" . $serie['nomSerie'] . "' /></td>";
         }
 
-        $res = $res . "</select>";
+        $res = $res . "</table>";
         echo ($res);
+        
+        return $res;
     }
 
     public function mostrarLlistatTemporades($llistatTemporades) {

@@ -42,6 +42,9 @@ class Control {
 
 		return($res);
 	}
+
+	public function valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valor, $comentari) {
+	}
 }
 
 ?>

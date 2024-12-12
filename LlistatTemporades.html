@@ -8,17 +8,18 @@
             <h1>Llistat de temporades</h1><br><br>
 
             <form action='./classes/GestioVista.php' method='POST'>
-                <?php
-                    include_once("classes/Control.php");
-                    include_once("classes/Vista.php");
-                    $c = new Control();
-                    $llistat = $c->llistatSeries();
-                    $v = new Vista();
-                    $v->mostrarSelectorSeries($llistat);
-                ?>
-                <br><br>
 
-                <input type="submit" name="opcio" value="Veure temporades">
+            <?php
+                include_once("classes/Control.php");
+                include_once("classes/Vista.php");
+                $c = new Control();
+                $llistat = $c->llistatSeries();
+                $v = new Vista();
+                $v->mostrarSelectorSeries($llistat);
+            ?>
+            <br><br>
+
+            <input type='submit' name='opcio' value='Veure temporades'>
             </form>
 
             <br>

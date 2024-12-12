@@ -19,6 +19,8 @@ class Usuari {
             unset($this->abd);
         }
     }
+
+    public function login($nomUsuari, $contrasenya) {}
 }
 
 ?>
