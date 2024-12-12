@@ -9,15 +9,13 @@ class Serie {
     private $valoracioMitjana;
     private $abd;
 
-    function __construct()
-    {
+    function __construct() {
         $this->abd = new TAccesbd(); 
     }
 
     function __destruct() {
-        if (isset($this->abd))
-        {
-        unset($this->abd);
+        if (isset($this->abd)) {
+            unset($this->abd);
         }
     }
 
@@ -52,4 +50,5 @@ class Serie {
         return $res;
     }
 }
+
 ?>

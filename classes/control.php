@@ -4,7 +4,7 @@ header("Content-Type: text/html;charset=utf-8");
 //Classe CONTROL
 include_once ("Serie.php");
 include_once ("Temporada.php");
-include_once("Valoracions.php");
+include_once("Valora.php");
 
 class Control {
 	
@@ -33,8 +33,8 @@ class Control {
 	public function llistatValoracions($nomSerie, $numTemporada) {
 		$res = "";
 		
-		$val = new Valoracio();
-		$res = $val->llistatValoracions($nomSerie, $numTemporada);
+		$v = new Valoracio();
+		$res = $v->llistatValoracions($nomSerie, $numTemporada);
 
 		if ($res == false) {
 			$res = "ERROR: La sèrie no te aquesta temporada";
@@ -44,6 +44,12 @@ class Control {
 	}
 
 	public function valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valor, $comentari) {
+		$res = "";
+
+		$v = new Valoracio();
+		$res = $v->valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valor, $comentari);
+		
+		return($res);
 	}
 }
 
