@@ -33,7 +33,68 @@ class Usuari {
     }
 
     public function login($nomUsuari, $contrasenya) {
-        // TODO
+        if ($this->existeixUsuari($nomUsuari) == false) {
+            return "ERROR: Usuari desconegut";
+        }
+
+        if ($this->usuariBloquejat($nomUsuari)) {
+            return "ERROR: Usuari bloquejat";
+        }
+
+        if ($this->comprovarCredencials($nomUsuari, $contrasenya) == false) {
+            $this->incrementarErrors($nomUsuari);
+            return "ERROR: Credencials incorrectes";
+        }
+
+        return "Login correcte";
+    }
+
+    public function existeixUsuari($nomUsuari) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT COUNT(*) FROM USUARI WHERE nomUsuari='$nomUsuari'
+        ";
+
+        $res = $this->abd->consultaUnica($consulta) == 1;
+        $this->abd->desconnectarBD();
+        return ($res);
+    }
+
+    public function usuariBloquejat($nomUsuari) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT numeroErrorsLogin FROM USUARI WHERE nomUsuari='$nomUsuari'
+        ";
+
+        $res = $this->abd->consultaUnica($consulta) >= 3;
+        $this->abd->desconnectarBD();
+        return ($res);
+    }
+
+    public function comprovarCredencials($nomUsuari, $contrasenya) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT COUNT(*) FROM USUARI WHERE nomUsuari='$nomUsuari' and contrasenya='$contrasenya'
+        ";
+
+        $res = $this->abd->consultaUnica($consulta) != 0;
+        $this->abd->desconnectarBD();
+        return ($res);
+    }
+
+    public function incrementarErrors($nomUsuari) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            UPDATE USUARI SET numeroErrorsLogin = numeroErrorsLogin + 1 WHERE nomUsuari='$nomUsuari'
+        ";
+
+        $res = $this->abd->consultaUnica($consulta);
+        $this->abd->desconnectarBD();
+        return ($res);
     }
 }
 

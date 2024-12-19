@@ -117,15 +117,6 @@ class TAccesbd
     }
     
     /*
-    Funció que retorna cert si la darrera consulta realitzada 
-    retorna algun element. En cas contrari, retorna fals.
-    */
-    public function existeixElement() {
-        $res = mysqli_fetch_assoc($this->dades)['COUNT(*)'] > 0;
-        return $res;
-    }
-    
-    /*
     Funció que després de fer un "consultaFila", i donat el nom d'un
     camp de la consulta, retorna la dada del camp del registre actual.
     Tant si el nom del camp no existeix als resultats, com si ja s'han

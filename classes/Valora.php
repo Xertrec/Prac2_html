@@ -69,38 +69,44 @@ class Valoracio {
         }
 
         $u = new Usuari();
-        if ($u->tipusUsuari($nomUsuari)) {
+        $tipusUsuariRes = $u->tipusUsuari($nomUsuari);
+        if (strpos($tipusUsuariRes, "ERROR") != false) {
             return "ERROR: L'usuari no és valorador";
         }
 
-        $u->login($nomUsuari, $contrasenya);
+        $loginRes = $u->login($nomUsuari, $contrasenya);
+        if (strpos($loginRes, "ERROR") != false) {
+            // Ha ocurrit un error
+            return $loginRes;
+        }
 
         if ($this->comprovarValoracioFeta($nomSerie, $numTemporada, $nomUsuari) == true) {
             return "ERROR: Temporada ja valorada pel valorador";
         }
-
         
         $this->abd->connectarBD();
         $consulta = "
             INSERT INTO valora
             VALUES ('$nomSerie', '$numTemporada', '$nomUsuari', '$valor', '$comentari')
         ";
-        if ($this->abd->consultaUnica($consulta) != true) {
+        if ($this->abd->consultaSQL($consulta) != true) {
             // Mostrar error
+            return "ERROR: No s'ha pogut valorar la temporada";
         }
         $this->abd->desconnectarBD();
 
-        $t = new Temporada();
         if ($t->recalcularMitjanaTemporada($nomSerie, $numTemporada) == false) {
             // Mostrar error
+            return "ERROR: No s'ha recalcular la nota mitjana de la temporada";
         }
 
         $s = new Serie();
-        if ($t->recalcularMitjanaSerie($nomSerie)) {
-            return "Temporada valorada correctament";
-        } else {
+        if ($s->recalcularMitjanaSerie($nomSerie) == false) {
             // Mostrar error
+            return "ERROR: No s'ha recalcular la nota mitjana de la serie";
         }
+        
+        return "Temporada valorada correctament";
     }
 
     public function comprovarValoracioFeta($nomSerie, $numTemporada, $nomUsuari) {

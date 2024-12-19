@@ -23,13 +23,13 @@ class Temporada {
     }
 
     public function existeixTemporadaSerie($nomSerie, $numTemporada) {
-        $res = false;
         $this->abd->connectarBD();
 
-        if ($this->abd->consultaSQL("SELECT COUNT(*) FROM temporada WHERE nomSerie = '$nomSerie' AND numTemporada = '$numTemporada'")) {
-            $res = $this->abd->existeixElement();
-            $this->abd->tancarConsulta();
-        }
+        $consulta = "
+            SELECT COUNT(*) FROM TEMPORADA 
+            WHERE nomSerie='$nomSerie' AND numTemporada='$numTemporada'
+        ";
+        $res = $this->abd->consultaUnica($consulta) == 1;
         
         $this->abd->desconnectarBD();
         return $res; 
@@ -63,7 +63,24 @@ class Temporada {
         return $res; 
     }
 
-    public function recalcularMitjanaTemporada($nomSerie, $numTemporada) {}
+    public function recalcularMitjanaTemporada($nomSerie, $numTemporada) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT AVG(valor) FROM VALORA 
+            WHERE nomSerie='$nomSerie' and numTemporada='$numTemporada';
+        ";
+        $mitjanaTemporada = $this->abd->consultaUnica($consulta);
+
+        $consulta = "
+            UPDATE temporada SET valoracioMitjana='$mitjanaTemporada' 
+            WHERE nomSerie='$nomSerie' and numTemporada='$numTemporada'
+        ";
+        $res = $this->abd->consultaSQL($consulta);
+
+        $this->abd->desconnectarBD();
+        return ($res);
+    }
 }
 
 ?>

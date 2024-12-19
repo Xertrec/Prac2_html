@@ -50,7 +50,23 @@ class Serie {
         return $res;
     }
 
-    public function recalcularMitjanaSerie($nomSerie) {}
+    public function recalcularMitjanaSerie($nomSerie) {
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT AVG(valor) FROM VALORA WHERE nomSerie='$nomSerie'
+        ";
+        $mitjanaSerie = $this->abd->consultaUnica($consulta);
+
+        
+        $consulta = "
+            UPDATE SERIE SET valoracioMitjana='$mitjanaSerie' WHERE nomSerie='$nomSerie'
+        ";
+        $res = $this->abd->consultaSQL($consulta);
+
+        $this->abd->desconnectarBD();
+        return ($res);
+    }
 }
 
 ?>

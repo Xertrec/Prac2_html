@@ -54,11 +54,12 @@ if (isset($_POST["opcio"])) {
                 $comentari = $_POST["comentari"];
 
                 $c = new Control();
-                if ($c->valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valoracio, $comentari)) {
+                $valoracioRes = $c->valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valoracio, $comentari);
+                if (strpos($valoracioRes, "ERROR") != false) {
                     // Si es un error
                     $v->mostrarError($llistaValoracions);
                 } else {
-                    // Mostrar mensaje de éxito
+                    echo $valoracioRes;
                 }
                 $v->mostrarPeu();
             }
