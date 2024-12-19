@@ -69,7 +69,7 @@ class Valoracio {
         }
 
         $u = new Usuari();
-        if ($u->tipusUsuari($nomUsuari) != "Valorador") {
+        if ($u->tipusUsuari($nomUsuari)) {
             return "ERROR: L'usuari no és valorador";
         }
 
@@ -112,6 +112,7 @@ class Valoracio {
             WHERE nomSerie = '$nomSerie' AND numTemporada = '$numTemporada' AND nomUsuari = '$nomUsuari'
         ";
 
+        
         return ($this->abd->consultaUnica($consulta) == 1);
         $this->abd->desconnectarBD();
     }

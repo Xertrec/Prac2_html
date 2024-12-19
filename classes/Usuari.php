@@ -21,7 +21,14 @@ class Usuari {
     }
 
     public function tipusUsuari($nomUsuari) {
-        // TODO
+        $this->abd->connectarBD();
+
+        $consulta = "
+            SELECT tipus FROM USUARI WHERE nomUsuari='$nomUsuari'
+        ";
+
+        return ($this->abd->consultaUnica($consulta) != "Valorador");
+        $this->abd->desconnectarBD();
     }
 
     public function login($nomUsuari, $contrasenya) {
