@@ -70,12 +70,12 @@ class Valoracio {
 
         $u = new Usuari();
         $tipusUsuariRes = $u->tipusUsuari($nomUsuari);
-        if (strpos($tipusUsuariRes, "ERROR") != false) {
+        if (strpos($tipusUsuariRes, "ERROR") !== false) {
             return "ERROR: L'usuari no és valorador";
         }
 
         $loginRes = $u->login($nomUsuari, $contrasenya);
-        if (strpos($loginRes, "ERROR") != false) {
+        if (strpos($loginRes, "ERROR") !== false) {
             // Ha ocurrit un error
             return $loginRes;
         }
@@ -89,7 +89,7 @@ class Valoracio {
             INSERT INTO valora
             VALUES ('$nomSerie', '$numTemporada', '$nomUsuari', '$valor', '$comentari')
         ";
-        if ($this->abd->consultaSQL($consulta) != true) {
+        if ($this->abd->consultaSQL($consulta) !== true) {
             // Mostrar error
             return "ERROR: No s'ha pogut valorar la temporada";
         }

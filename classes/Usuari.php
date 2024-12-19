@@ -37,7 +37,7 @@ class Usuari {
             return "ERROR: Usuari desconegut";
         }
 
-        if ($this->usuariBloquejat($nomUsuari)) {
+        if ($this->usuariBloquejat($nomUsuari) == true) {
             return "ERROR: Usuari bloquejat";
         }
 
@@ -77,10 +77,11 @@ class Usuari {
         $this->abd->connectarBD();
 
         $consulta = "
-            SELECT COUNT(*) FROM USUARI WHERE nomUsuari='$nomUsuari' and contrasenya='$contrasenya'
+            SELECT COUNT(*) FROM USUARI 
+            WHERE nomUsuari='$nomUsuari' AND contrasenya='$contrasenya'
         ";
 
-        $res = $this->abd->consultaUnica($consulta) != 0;
+        $res = $this->abd->consultaUnica($consulta) == 1;
         $this->abd->desconnectarBD();
         return ($res);
     }
@@ -92,7 +93,7 @@ class Usuari {
             UPDATE USUARI SET numeroErrorsLogin = numeroErrorsLogin + 1 WHERE nomUsuari='$nomUsuari'
         ";
 
-        $res = $this->abd->consultaUnica($consulta);
+        $res = $this->abd->consultaSQL($consulta);
         $this->abd->desconnectarBD();
         return ($res);
     }

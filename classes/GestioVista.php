@@ -55,9 +55,9 @@ if (isset($_POST["opcio"])) {
 
                 $c = new Control();
                 $valoracioRes = $c->valorarTemporada($nomSerie, $numTemporada, $nomUsuari, $contrasenya, $valoracio, $comentari);
-                if (strpos($valoracioRes, "ERROR") != false) {
+                if (strpos($valoracioRes, "ERROR") !== false) {
                     // Si es un error
-                    $v->mostrarError($llistaValoracions);
+                    $v->mostrarError($valoracioRes);
                 } else {
                     echo $valoracioRes;
                 }
