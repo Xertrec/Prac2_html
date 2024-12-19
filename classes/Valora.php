@@ -113,8 +113,9 @@ class Valoracio {
         ";
 
         
-        return ($this->abd->consultaUnica($consulta) == 1);
+        $res = $this->abd->consultaUnica($consulta) == 1;
         $this->abd->desconnectarBD();
+        return ($res);
     }
 }
 

@@ -27,8 +27,9 @@ class Usuari {
             SELECT tipus FROM USUARI WHERE nomUsuari='$nomUsuari'
         ";
 
-        return ($this->abd->consultaUnica($consulta) != "Valorador");
+        $res = $this->abd->consultaUnica($consulta) != "Valorador";
         $this->abd->desconnectarBD();
+        return ($res);
     }
 
     public function login($nomUsuari, $contrasenya) {
